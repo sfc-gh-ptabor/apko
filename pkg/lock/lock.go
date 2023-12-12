@@ -26,7 +26,10 @@ type LockPkg struct {
 	Signature    LockPkgRangeAndChecksum `json:"signature"`
 	Control      LockPkgRangeAndChecksum `json:"control"`
 	Data         LockPkgRangeAndChecksum `json:"data"`
-	Checksum     string                  `jsin:"checksum"` // populated since Apko 0.12
+	// Checksum is APK-style: 'Q1' prefixed SHA1 hash of the second gzip stream (control stream) in the package.
+	// For data-consistency checks use Signature, Control & Data above.
+	// Populated since Apko 0.13.
+	Checksum string `json:"checksum"`
 }
 type LockPkgRangeAndChecksum struct {
 	Range    string `json:"range"`
